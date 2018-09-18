@@ -1,3 +1,11 @@
+<% if @lesson.errors.any? %>
+  <h2>We have some errors here !</h2>
+  <ul>
+    <% @lesson.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 <h1>New lesson</h1>
 
 <%= render 'form' %>

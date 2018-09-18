@@ -16,7 +16,8 @@ class Lesson < ApplicationRecord
   validates_presence_of :name
 
 
-  belongs_to :topic, optional: true
+  #belongs_to :topic, optional: true
+  belongs_to :subject, optional: true
 
   # validate :validate_timings
   # 現有資料格式套用 simple_calendar，但 simple_calendar view 沒有 endtime 輸入，暫時不用驗證

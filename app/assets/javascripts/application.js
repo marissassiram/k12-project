@@ -17,3 +17,27 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+
+function showPeriodAndFrequency(value){
+
+    switch (value) {
+        case 'Daily':
+            $('#period').html('day');
+            $('#frequency').show();
+            break;
+        case 'Weekly':
+            $('#period').html('week');
+            $('#frequency').show();
+            break;
+        case 'Monthly':
+            $('#period').html('month');
+            $('#frequency').show();
+            break;
+        case 'Yearly':
+            $('#period').html('year');
+            $('#frequency').show();
+            break;
+            
+        default:
+            $('#frequency').hide();
+    }

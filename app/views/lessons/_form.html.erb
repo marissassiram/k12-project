@@ -1,26 +1,35 @@
+<%#remote_form_for @event, :url => {:action => :create}, :before => "$('#creating_events').show();", :complete => "$('#creating_events').hide();" do |f| %>
+<%= form_for @lesson, :html => { :id => 'event_form' } do |f| %>
+<p>
+  <%=f.label :name %>
+  <br/>
+  <%=f.text_field :name %>
+</p>
 
-<%= form_for(@lesson) do |f| %>
-  <% if @lesson.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
-
-      <ul>
-      <% @lesson.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<p>
+  <%=f.label :start_time, 'Start Time' %>
+  <br/>
+  <%=f.datetime_select :start_time %>
+</p>
+<p>
+  <%=f.label :end_time, 'End Time' %>
+  <br/>
+  <%=f.datetime_select :end_time %>
+</p>
+<p>
+  <%=f.label :all_day %>
+  <%=f.check_box :all_day %>
+</p>
+<p>
+  <%=f.label :period, "Repeats" %>
+  <%=f.select :period, Lesson::REPEATS,{} %> <%# , :onchange => "showPeriodAndFrequency(this.value);" %>
+</p>
+<p id = "frequency"><%#  style = "display:none;" %>
+  <%=f.label :frequency, "Repeat every" %>
+  <%=f.select :frequency, (1..30).to_a %> <span id = "period"></span>
+</p>
+<%=f.hidden_field :id, :value => @lesson.id %>
+<p>
+  <%=f.submit 'Create' %> <span id = "creating_events" class="spinner" style = "display:none;">Creating, Please wait...</span>
+</p>
+<%end %>

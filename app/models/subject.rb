@@ -12,7 +12,8 @@
 
 class Subject < ApplicationRecord
   belongs_to :project, optional: true
-  has_many :topics, dependent: :destroy
+  #has_many :topics, dependent: :destroy
+  has_many :lessons, dependent: :destroy
 
   has_many :plans
   has_many :materials
@@ -32,8 +33,9 @@ class Subject < ApplicationRecord
     n_st, n_et = st, et
     
     while frequency.send(p).from_now(st) <= end_time
-      topic = self.topics.create( name: "未分類" )
-      topic.lessons.create(:name => name, :start_time => st, :end_time => et)
+      #topic = self.topics.create( name: "未分類" )
+      #topic.lessons.create(:name => name, :start_time => st, :end_time => et)
+      self.lessons.create(:name => name, :all_day => all_day, :start_time => n_st, :end_time => n_et)
       n_st = st = frequency.send(p).from_now(st)
       n_et = et = frequency.send(p).from_now(et)
       
